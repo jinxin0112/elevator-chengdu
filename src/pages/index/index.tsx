@@ -1,16 +1,13 @@
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View, Button, Text } from '@tarojs/components'
-import { AtTabBar }  from 'taro-ui'
+import { View, Text } from '@tarojs/components'
+import { AtTabBar } from 'taro-ui'
 import { observer, inject } from '@tarojs/mobx'
 
 import './index.less'
 
 type PageStateProps = {
-  counterStore: {
-    counter: number,
-    increment: Function,
-    decrement: Function,
-    incrementAsync: Function
+  Store: {
+    currentTab: number,
   }
 }
 
@@ -18,7 +15,7 @@ interface Index {
   props: PageStateProps;
 }
 
-@inject('counterStore')
+@inject('Store')
 @observer
 class Index extends Component {
 
@@ -33,46 +30,41 @@ class Index extends Component {
     navigationBarTitleText: '首页'
   }
 
-  componentWillMount () { }
+  componentWillMount() { }
 
-  componentWillReact () {
+  componentWillReact() {
     console.log('componentWillReact')
   }
 
-  componentDidMount () { }
+  componentDidMount() { }
 
-  componentWillUnmount () { }
+  componentWillUnmount() { }
 
-  componentDidShow () { }
+  componentDidShow() { }
 
-  componentDidHide () { }
+  componentDidHide() { }
 
-  increment = () => {
-    const { counterStore } = this.props
-    counterStore.increment()
+
+  handleClick = () => {
+
   }
-
-  decrement = () => {
-    const { counterStore } = this.props
-    counterStore.decrement()
-  }
-
-  incrementAsync = () => {
-    const { counterStore } = this.props
-    counterStore.incrementAsync()
-  }
-
-  render () {
-    const { counterStore: { counter } } = this.props
+  render() {
+    const { Store: { currentTab } } = this.props
     return (
       <View className='index'>
-          <Button onClick={this.increment}>+</Button>
-          <Button onClick={this.decrement}>-</Button>
-          <Button onClick={this.incrementAsync}>Add Async</Button>
-          <Text>{counter}</Text>
+        <Text>{currentTab}</Text>
+        <AtTabBar
+          tabList={[
+            { title: '待办事项'},
+            { title: '拍照' },
+            { title: '通讯录' }
+          ]}
+          onClick={this.handleClick.bind(this)}
+          current={currentTab}
+        />
       </View>
     )
   }
 }
 
-export default Index  as ComponentType
+export default Index as ComponentType
