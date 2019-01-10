@@ -8,6 +8,7 @@ import './index.less'
 type PageStateProps = {
   Store: {
     currentTab: number,
+    changeTab: Function,
   }
 }
 
@@ -45,8 +46,9 @@ class Index extends Component {
   componentDidHide() { }
 
 
-  handleClick = () => {
-
+  handleClick = (value) => {
+    const { Store } = this.props;
+    Store.changeTab(value);
   }
   render() {
     const { Store: { currentTab } } = this.props
@@ -54,8 +56,9 @@ class Index extends Component {
       <View className='index'>
         <Text>{currentTab}</Text>
         <AtTabBar
+          fixed
           tabList={[
-            { title: '待办事项'},
+            { title: '待办事项' },
             { title: '拍照' },
             { title: '通讯录' }
           ]}
