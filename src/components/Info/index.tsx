@@ -17,7 +17,7 @@ class Item extends Component<IFItem,any> {
   }
   render() {
     const { data } = this.props;
-    const {title, date, star, img} = data
+    const {title, date, star, img, stared} = data
     return (
     <View className='at-row news-item'>
       <View className='at-col at-col-4'>
@@ -28,7 +28,7 @@ class Item extends Component<IFItem,any> {
         <View className='news-date-star'>
         <View className='news-date'>{date}</View>
         <View className='news-star' onClick={this.toggleStar}>
-        <AtIcon value={`heart${star==88?'':'-2'}`} size='16' color='#F00'></AtIcon>
+        <AtIcon value={`heart${!stared?'':'-2'}`} size='16' color='#F00'></AtIcon>
           <span>{star}</span>
         </View>
         </View>
@@ -69,10 +69,10 @@ export default class Info extends Component {
             <Image className='image-0' src={require('../../assets/img/swiper0.png')} />
           </SwiperItem>
           <SwiperItem>
-            <Image className='image-1' src={require('../../assets/img/swiper0.png')} />
+            <Image className='image-1' src={require('../../assets/img/timg2.png')} />
           </SwiperItem>
           <SwiperItem>
-            <Image className='image-2' src={require('../../assets/img/swiper0.png')} />
+            <Image className='image-2' src={require('../../assets/img/timg1.png')} />
           </SwiperItem>
         </Swiper>
         <View className="grid-box">

@@ -29,27 +29,27 @@ export default class Info extends Component {
                 [
                 {
                     image: require('../../assets/img/grid5.png'),
-                    value: '法律法规'
+                    value: '意见反馈'
                 },
                 {
                     image: require('../../assets/img/grid6.png'),
-                    value: '最新资讯'
+                    value: '电梯报修'
                 },
                 {
                     image: require('../../assets/img/grid7.png'),
-                    value: '最新政策'
+                    value: '投诉评价'
                 },
                 {
                     image: require('../../assets/img/grid8.png'),
-                    value: '企业名单'
+                    value: '省特检'
                 },
                 {
                     image: require('../../assets/img/grid9.png'),
-                    value: '最新政策'
+                    value: '市特检'
                 },
                 {
                     image: require('../../assets/img/grid10.png'),
-                    value: '企业名单'
+                    value: '省特协'
                 }
                 ]
             } />        
