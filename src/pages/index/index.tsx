@@ -4,10 +4,10 @@ import { AtTabBar } from 'taro-ui'
 import { observer, inject } from '@tarojs/mobx'
 import './index.less'
 import Info from '../../components/Info'
-import Suggest from '../../components/Suggest'
+import Help from '../../components/Help'
 import User from '../../components/User'
 
-const components = [Info, Suggest, User]
+const components = [Info, Help, User]
 
 type PageStateProps = {
   Store: {

@@ -1,6 +1,6 @@
 import Taro, { Component } from '@tarojs/taro'
 import { observer, inject } from '@tarojs/mobx'
-import { Swiper, SwiperItem, View, Image, ScrollView, Text } from '@tarojs/components'
+import { Swiper, SwiperItem, View, Image, ScrollView } from '@tarojs/components'
 import { AtGrid,AtIcon } from "taro-ui"
 import './index.less'
 
@@ -17,18 +17,18 @@ class Item extends Component<IFItem,any> {
   }
   render() {
     const { data } = this.props;
-    const {title, date, star} = data
+    const {title, date, star, img, stared} = data
     return (
     <View className='at-row news-item'>
       <View className='at-col at-col-4'>
-        A
+        <Image src={img} />
       </View>
       <View className='at-col at-col-8'>
-        <Text className='news-title'>{title}</Text>
+        <View className='news-title'>{title}</View>
         <View className='news-date-star'>
         <View className='news-date'>{date}</View>
         <View className='news-star' onClick={this.toggleStar}>
-        <AtIcon value={`heart${star==88?'':'-2'}`} size='16' color='#F00'></AtIcon>
+        <AtIcon value={`heart${!stared?'':'-2'}`} size='16' color='#F00'></AtIcon>
           <span>{star}</span>
         </View>
         </View>
@@ -40,24 +40,20 @@ class Item extends Component<IFItem,any> {
 @inject('Store')
 @observer
 export default class Info extends Component {
-  state={
-    autoplay: false
-  }
   componentDidMount() {
-    this.setState({
-      autoplay: true
-    })
+    setTimeout(() => {
+      document.querySelector('.swiper-container').classList.add('swiper')
+    }, 1200)
   }
   handleScrollToLower = ()=> {
-      console.log('到底了');
+      alert('到底了');
   }
   render() {
-    console.log('render');
     const {Store} = this.props;
     const {news} = Store;
-    const {autoplay} = this.state;
     return (
       <ScrollView
+        className='info-scroll-view'
         scrollY
         onScrollToLower={this.handleScrollToLower}
       >
@@ -67,16 +63,16 @@ export default class Info extends Component {
           indicatorActiveColor='#fff'
           circular
           indicatorDots
-          autoplay={autoplay}
+          autoplay
         >
           <SwiperItem>
             <Image className='image-0' src={require('../../assets/img/swiper0.png')} />
           </SwiperItem>
           <SwiperItem>
-            <Image className='image-1' src={require('../../assets/img/swiper0.png')} />
+            <Image className='image-1' src={require('../../assets/img/timg2.png')} />
           </SwiperItem>
           <SwiperItem>
-            <Image className='image-2' src={require('../../assets/img/swiper0.png')} />
+            <Image className='image-2' src={require('../../assets/img/timg1.png')} />
           </SwiperItem>
         </Swiper>
         <View className="grid-box">
@@ -110,7 +106,9 @@ export default class Info extends Component {
               }
           </View>
         </View>
-
+        <View className="bottom-line">
+          我也是有底线的哟～
+        </View>
       </ScrollView>
     )
   }
