@@ -4,9 +4,10 @@ import { AtTabBar } from 'taro-ui'
 import { observer, inject } from '@tarojs/mobx'
 import './index.less'
 import Info from '../../components/Info'
+import Suggest from '../../components/Suggest'
 import User from '../../components/User'
 
-const components = [Info, User]
+const components = [Info, Suggest, User]
 
 type PageStateProps = {
   Store: {
@@ -27,7 +28,7 @@ class Index extends Component {
    * 指定config的类型声明为: Taro.Config
    *
    * 由于 typescript 对于 object 类型推导只能推出 Key 的基本类型
-   * 对于像 navigationBarTextStyle: 'black' 这样的推导出的类型是 stringez                                
+   * 对于像 navigationBarTextStyle: 'black' 这样的推导出的类型是 stringez
    * 提示和声明 navigationBarTextStyle: 'black' | 'white' 类型冲突, 需要显示声明类型
    */
   config: Config = {
