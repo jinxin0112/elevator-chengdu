@@ -1,3 +1,38 @@
 .at-tab-bar__item{
     padding-bottom: 20px !important;
 }
+.panel {
+    margin: 32px 0 56px;
+
+    &__title {
+      position: relative;
+      margin-bottom: 50px;
+      padding-left: 30px;
+      color: #333333;
+      font-size: 28px;
+      font-weight: bold;
+      line-height: 1.5;
+
+      &::before {
+        content: "";
+        display: inline-block;
+        position: absolute;
+        left: 4px;
+        top: 50%;
+        margin-top: -20px;
+        width: 2PX;
+        height: 40px;
+        background-color: #0094FF;
+        box-shadow: 0 7px 12px 0 rgba(97, 144, 232, 0.2);
+        border-radius: 1PX;
+      }
+    }
+
+    &__content {
+      padding: 0 30px;
+
+      &.no-padding {
+        padding: 0;
+      }
+    }
+  }
