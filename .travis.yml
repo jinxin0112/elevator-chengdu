@@ -1,0 +1,24 @@
+
+language: node_js
+node_js: stable
+# S: Build Lifecycle
+install:
+  - yarn global add @tarojs/cli@1.2.4
+  - yarn install
+script:
+  - yarn run build:h5
+after_script:
+  - cd dist
+  - git init
+  - git config user.name "jinxin0112"
+  - git config user.email "m18508218948@163.com"
+  - git add .
+  - git commit -m 'deploy'
+  - git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:master
+# E: Build LifeCycle
+branches:
+  only:
+    - dev
+env:
+  global:
+    - GH_REF: github.com/Alkaids/Alkaids.github.io.git
