@@ -6,6 +6,7 @@ module.exports = {
   },
   weapp: {},
   h5: {
+    publicPath: '/',
     devServer: {
       port: 8888,
       host: '0.0.0.0'
