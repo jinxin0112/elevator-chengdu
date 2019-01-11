@@ -43,10 +43,10 @@ export default class Info extends Component {
   componentDidMount() {
     setTimeout(() => {
       document.querySelector('.swiper-container').classList.add('swiper')
-    }, 800)
+    }, 1200)
   }
   handleScrollToLower = ()=> {
-      console.log('到底了');
+      alert('到底了');
   }
   render() {
     const {Store} = this.props;
@@ -106,7 +106,9 @@ export default class Info extends Component {
               }
           </View>
         </View>
-
+        <View className="bottom-line">
+          我也是有底线的哟～
+        </View>
       </ScrollView>
     )
   }
