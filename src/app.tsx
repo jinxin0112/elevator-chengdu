@@ -28,6 +28,7 @@ class App extends Component {
       'pages/info/index',
       'pages/help/index',
       'pages/user/index',
+      'pages/companys/index',
     ],
     window: {
       backgroundTextStyle: 'light',
