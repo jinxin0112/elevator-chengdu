@@ -48,6 +48,11 @@ export default class Info extends Component {
   handleScrollToLower = ()=> {
       alert('到底了');
   }
+  handleClick = (_, index) => {
+    index === 3 && Taro.navigateTo({
+      url: '/pages/companys/index'
+    })
+  }
   render() {
     const {Store} = this.props;
     const {news} = Store;
@@ -76,7 +81,7 @@ export default class Info extends Component {
           </SwiperItem>
         </Swiper>
         <View className="grid-box">
-          <AtGrid hasBorder={false} columnNum={4} data={
+          <AtGrid onClick={this.handleClick} hasBorder={false} columnNum={4} data={
             [
               {
                 image: require('../../assets/img/grid1.png'),
