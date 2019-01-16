@@ -49,6 +49,11 @@ class Index extends Component {
     ]
     return (
       <View className='index'>
+        <button onClick={()=>{
+          Taro.redirectTo({
+            url: '/pages/info/index'
+          })
+        }}>go</button>
         <View>
           <CurPage/>
         </View>

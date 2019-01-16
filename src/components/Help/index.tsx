@@ -4,6 +4,21 @@ import { AtButton, AtInput, AtGrid } from 'taro-ui'
 import './index.less'
 
 export default class Info extends Component {
+  handleClick=(_, index)=>{
+    switch (index) {
+        case 3:
+            window.location.href = 'http://zc.sctzsbhy.com/register/front/query/index.htm?from=singlemessage'
+            break;
+        case 4:
+            window.location.href = 'http://stjy.everythingnewell.com/web/Query.aspx?from=singlemessage'
+            break;
+        case 5:
+            window.location.href = 'http://www.scsei.org.cn/'
+            break;    
+        default:
+            break;
+    }
+  }
   render() {
     return (
       <ScrollView 
@@ -25,7 +40,7 @@ export default class Info extends Component {
             <AtButton>一键查询</AtButton>            
         </View>
         <View className="help-card help-grids">
-            <AtGrid hasBorder={false} columnNum={3} mode="rect" data={
+            <AtGrid onClick={this.handleClick} hasBorder={false} columnNum={3} mode="rect" data={
                 [
                 {
                     image: require('../../assets/img/grid5.png'),

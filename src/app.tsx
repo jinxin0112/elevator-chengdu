@@ -24,7 +24,10 @@ class App extends Component {
    */
   config: Config = {
     pages: [
-      'pages/index/index'
+      'pages/index/index',
+      'pages/info/index',
+      'pages/help/index',
+      'pages/user/index',
     ],
     window: {
       backgroundTextStyle: 'light',
