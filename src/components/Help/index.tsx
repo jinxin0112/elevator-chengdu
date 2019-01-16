@@ -7,13 +7,13 @@ export default class Info extends Component {
   handleClick=(_, index)=>{
     switch (index) {
         case 3:
-            window.location.href = 'http://zc.sctzsbhy.com/register/front/query/index.htm?from=singlemessage'
-            break;
+            window.location.href = 'http://www.scsei.org.cn/'
+            break;  
         case 4:
             window.location.href = 'http://stjy.everythingnewell.com/web/Query.aspx?from=singlemessage'
             break;
         case 5:
-            window.location.href = 'http://www.scsei.org.cn/'
+            window.location.href = 'http://zc.sctzsbhy.com/register/front/query/index.htm?from=singlemessage'
             break;    
         default:
             break;
