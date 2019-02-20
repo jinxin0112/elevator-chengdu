@@ -6,6 +6,6 @@ module.exports = {
   },
   weapp: {},
   h5: {
-    publicPath: '/',
+    publicPath: '/elevator-chengdu',
   }
 }
