@@ -30,6 +30,8 @@ class App extends Component {
       'pages/user/index',
       'pages/companys/index',
       'pages/call/index',
+      'pages/survey/index',
+      'pages/error/errorPage'
     ],
     window: {
       backgroundTextStyle: 'light',

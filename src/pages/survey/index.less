@@ -1,0 +1,154 @@
+.survey-bg {
+  width: 100%;
+  height: 326px;
+}
+.survey-card {
+  box-sizing: border-box;
+  width: 690px;
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 8px 10px 50px 0px rgba(75, 72, 73, 0.08);
+  border-radius: 4px;
+  margin: 40px auto;
+  padding: 40px;
+  .title {
+    font-size: 28px;
+    font-family: PingFangSC-Regular;
+    font-weight: 400;
+    color: rgba(51, 51, 51, 1);
+    line-height: 40px;
+    letter-spacing: 1px;
+    height: 80px;
+    padding-bottom: 40px;
+    margin-bottom: 40px;
+    width: 100%;
+    border-bottom: 1px solid #ddd;
+  }
+  .survey-question {
+    font-size: 28px;
+    font-family: PingFangSC-;
+    font-weight: normal;
+    color: rgba(153, 153, 153, 1);
+    line-height: 40px;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+  }
+  .survey-answer {
+    .radio-item {
+      font-size: 24px;
+      font-family: PingFangSC-Regular;
+      font-weight: 400;
+      color: rgba(102, 102, 102, 1);
+      line-height: 50px;
+      letter-spacing: 1px;
+      padding-top: 10px;
+      padding-bottom: 10px;
+      padding-left: 40px;
+      display: flex;
+      .radio-icon {
+        flex: 0.75;
+        box-sizing: border-box;
+        .survey-icon {
+          margin-top: 5px;
+          .outerCircle {
+            stroke: #0094ff;
+            fill: #fff;
+            stroke-width: 1pt;
+          }
+          .innerCircle {
+            fill: #0094ff;
+            stroke-width: 0pt;
+          }
+        }
+      }
+      .radio-label {
+        flex: 6;
+      }
+    }
+  }
+}
+.survey-submit {
+  width: 90%;
+  margin: 10px auto 50px auto;
+  background-color: #0094ff !important;
+  border-color: #0094ff !important;
+}
+.at-modal__container {
+  width: 670px;
+}
+.at-modal-header {
+  white-space: normal;
+  text-align: left;
+  font-size: 28px;
+  font-family: PingFangSC-Regular;
+  font-weight: 400;
+  color: rgba(51, 51, 51, 1);
+  line-height: 40px;
+  letter-spacing: 1px;
+  padding: 50px 40px !important;
+}
+.at-modal {
+  .at-input {
+    padding: 40px 0;
+  }
+  .at-input::before {
+    content: "";
+    position: absolute;
+    -webkit-transform-origin: center;
+    -ms-transform-origin: center;
+    transform-origin: center;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    pointer-events: none;
+    top: -150%;
+    left: -50%;
+    right: -50%;
+    bottom: 50%;
+    border: 0 solid #d6e4ef;
+    -webkit-transform: scale(0.5);
+    -ms-transform: scale(0.5);
+    transform: scale(0.5);
+    border-bottom-width: 1px;
+  }
+  .at-input::after {
+    display: none;
+  }
+  .at-modal-header::after {
+    display: none;
+  }
+  .at-modal-content {
+    padding: 0 40px;
+  }
+  button {
+    color: #0094ff !important;
+  }
+  .res.at-modal-header {
+    text-align: center;
+    .taro-img {
+      width: 120px;
+      height: 120px;
+    }
+    .succTip{
+        font-size:44px;
+        font-family:PingFangSC-Regular;
+        font-weight:400;
+        color:rgba(51,51,51,1);
+        line-height:62px;
+        margin-top: 44px;
+    }
+    .subSuccTip{
+        font-size:32px;
+        font-family:PingFangSC-Regular;
+        font-weight:400;
+        color:rgba(185,185,185,1);
+        line-height:56px;
+    }
+    .closebtn{
+        position: absolute;
+        top: 0%;
+        right: 0%;
+        font-size: 50px;
+        padding:20px 35px;
+        color: #b8b8b8;
+    }
+  }
+}

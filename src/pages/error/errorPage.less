@@ -1,0 +1,32 @@
+@bg: #111516;
+@fontColor: #A6AEAE;
+
+.error-page{
+  height: 100%;
+  .parent {
+    height: inherit;
+    position: relative;
+    background-color: @bg;
+
+    .child {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 28px;
+      color: @fontColor;
+      div {
+        text-align: center;
+        margin: 10px 0
+      }
+      .button-error {
+        background-color: #132D2E;
+        color: #FEFFFF;
+        border: 2px solid #24FCFF;
+        border-radius: 0px;
+      }
+    }
+  }
+}
+
+

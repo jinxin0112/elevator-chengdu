@@ -1,6 +1,7 @@
 module.exports = {
   env: {
-    NODE_ENV: '"development"'
+    NODE_ENV: '"development"',
+    baseUrl: '/apis',
   },
   defineConstants: {
   },
@@ -8,6 +9,13 @@ module.exports = {
   h5: {
     publicPath: '/',
     devServer: {
+      proxy: {
+        '/apis': {
+          target: 'http://cdelevator.labradors.work',
+          changeOrigin: true,
+          secure: false,
+        },
+      },
       port: 8888,
       host: '0.0.0.0'
     },
