@@ -6,7 +6,7 @@ const events = new Taro.Events();
 
 events.on('error', (arg) => {
   Taro.redirectTo({
-    url: 'pages/error/errorPage'
+    url: '/pages/error/errorPage'
   })
 })
 

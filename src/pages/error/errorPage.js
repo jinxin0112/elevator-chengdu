@@ -6,7 +6,7 @@ import './errorPage.less';
 export default class ErrorPage extends Component {
 
   redirect = () => {
-    taro.redirectTo({ url: 'pages/survey/index' });
+    taro.redirectTo({ url: '/pages/survey/index' });
   }
 
   render() {

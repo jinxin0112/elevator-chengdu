@@ -19,9 +19,17 @@ export async function submitCurrent(params){
 
 // 提交用户信息
 export async function submitUser(params){
+    const {name, mobile, address} = params;
     return request({
         method: 'post',
-        url: '/survey/user',
-        data: params
+        url: `/survey/user?name=${name}&mobile=${mobile}&address=${address}`
     })    
+}
+
+// 扫码
+export async function smElevator(params){
+    return request({
+        method: 'post',
+        url: `/elevator?num=${params.num}`
+    })     
 }

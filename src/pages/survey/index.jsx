@@ -85,6 +85,7 @@ class Survey extends Component {
   state = {
     isOpened: false,
     isResOpened: false,
+    isFaildOpened: false,
     address: "",
     mobile: "",
     name: ""
@@ -106,10 +107,26 @@ class Survey extends Component {
   handleSubmit = () => {
     console.log({ name, mobile, address });
   };
+  handleBlur = () => {
+    console.log("handleBlur");
+    setTimeout(() => {
+      const scrollHeight =
+        document.documentElement.scrollTop || document.body.scrollTop || 0;
+      console.log("scrollHeight", scrollHeight);
+      window.scrollTo(0, Math.max(scrollHeight - 1, 0));
+    }, 100);
+  };
   render() {
     const { Store } = this.props;
     const { currentSurvey, canSubmit } = Store;
-    const { isOpened, address, mobile, name, isResOpened } = this.state;
+    const {
+      isOpened,
+      address,
+      mobile,
+      name,
+      isResOpened,
+      isFaildOpened
+    } = this.state;
     return (
       <ScrollView className="info-scroll-view" scrollY>
         {currentSurvey.length === 0 ? (
@@ -161,8 +178,16 @@ class Survey extends Component {
               className="survey-submit"
               disabled={!canSubmit}
               onClick={() => {
-                Store.submit();
-                this.toggleModal(true);
+                Store.submit(
+                  () => {
+                    this.toggleModal(true);
+                  },
+                  () => {
+                    this.setState({
+                      isFaildOpened: true
+                    });
+                  }
+                );
               }}
             >
               提交
@@ -180,6 +205,7 @@ class Survey extends Component {
                   placeholder="请输入姓名"
                   value={name}
                   onChange={this.handleFormChange.bind(null, "name")}
+                  onBlur={this.handleBlur}
                 />
                 <AtInput
                   name="mobile"
@@ -188,6 +214,7 @@ class Survey extends Component {
                   placeholder="请输入手机号"
                   value={mobile}
                   onChange={this.handleFormChange.bind(null, "mobile")}
+                  onBlur={this.handleBlur}
                 />
                 <AtInput
                   name="address"
@@ -196,6 +223,7 @@ class Survey extends Component {
                   placeholder="请输入地址"
                   value={address}
                   onChange={this.handleFormChange.bind(null, "address")}
+                  onBlur={this.handleBlur}
                 />
               </AtModalContent>
               <AtModalAction>
@@ -210,12 +238,14 @@ class Survey extends Component {
                 <Button
                   onClick={() => {
                     const { name, mobile, address } = this.state;
-                    Store.submitUser({ name, mobile, address }, () => {
-                      this.toggleModal(false);
-                      this.setState({
-                        isResOpened: true
+                    if (name && mobile && address) {
+                      Store.submitUser({ name, mobile, address }, () => {
+                        this.toggleModal(false);
+                        this.setState({
+                          isResOpened: true
+                        });
                       });
-                    });
+                    }
                   }}
                 >
                   提交
@@ -238,6 +268,24 @@ class Survey extends Component {
                   x
                 </span>
               </AtModalHeader>
+            </AtModal>
+            <AtModal isOpened={isFaildOpened}>
+              <AtModalHeader className="res faild">
+                <View className="succTip">
+                  很遗憾，您的答题不理想，请再接再厉!
+                </View>
+              </AtModalHeader>
+              <AtModalAction>
+                <Button
+                  onClick={() => {
+                    this.setState({
+                      isFaildOpened: false
+                    });
+                  }}
+                >
+                  关闭
+                </Button>
+              </AtModalAction>
             </AtModal>
           </View>
         )}

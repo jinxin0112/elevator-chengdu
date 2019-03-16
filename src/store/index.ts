@@ -1,8 +1,15 @@
 import { observable, action, toJS } from "mobx";
-import { fetchCurrent, submitCurrent, submitUser } from "../services";
+import {
+  fetchCurrent,
+  submitCurrent,
+  submitUser,
+  smElevator
+} from "../services";
+import Taro from "@tarojs/taro";
 
 const Store = observable(
   {
+    serviceData: {},
     currentTab: 0,
     news: [
       {
@@ -54,7 +61,7 @@ const Store = observable(
       });
       const count = toJS(this.currentSurvey).reduce((pre, item) => {
         if (item.answer !== null) {
-          pre ++;
+          pre++;
         }
         return pre;
       }, 0);
@@ -78,13 +85,32 @@ const Store = observable(
         }
       });
     },
-    async submit() {
+    async submit(succ, err) {
       const data = toJS(this.currentSurvey);
       const res = await submitCurrent(data);
+      if (res && res.data) {
+        succ();
+      } else {
+        err();
+      }
     },
     async submitUser(data, callback) {
       const res = await submitUser(data);
       callback();
+    },
+    async smElevator(params, err) {
+      const res = await smElevator(params);
+      const { data } = res;
+      if (data) {
+        this.serviceData = data || {};
+        Taro.navigateTo({
+          url: "/pages/service/index"
+        }).then(() => {
+          console.log("hello");
+        });
+      } else {
+        err();
+      }
     }
   },
   {
