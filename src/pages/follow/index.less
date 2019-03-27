@@ -1,0 +1,138 @@
+.follow-page{
+  min-height: 100vh !important;
+}
+.follow-card {
+  box-sizing: border-box;
+  width: 690px;
+  height: 283px;
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 8px 10px 50px 0px rgba(75, 72, 73, 0.08);
+  border-radius: 4px;
+  margin: 40px auto;
+  padding: 40px;
+  display: flex;
+  .follow-card-left {
+    flex: 2.3;
+    width: 157px;
+    height: 202px;
+    .taro-img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .follow-card-right {
+    flex: 6;
+    padding: 8px 20px;
+    .follow-card-code {
+      display: flex;
+      line-height: 48px;
+      h3 {
+        flex: 3;
+        font-size: 26px;
+        font-family: PingFangSC-Medium;
+        font-weight: 500;
+        color: rgba(51, 51, 51, 1);
+      }
+      .follow-card-btn {
+        flex: 4;
+        text-align: right;
+        .weui-btn {
+          width: 116px;
+          height: 48px;
+          background: rgba(0, 148, 255, 1);
+          border-radius: 4px;
+          line-height: 48px;
+          font-size: 20px;
+          margin: 0;
+          color: #fff;
+          float: right;
+          padding: 0;
+        }
+      }
+    }
+    .follow-card-add {
+      font-size: 24px;
+      font-family: PingFangSC-Regular;
+      font-weight: 400;
+      color: rgba(102, 102, 102, 1);
+      line-height: 33px;
+      margin-top: 30px;
+    }
+  }
+}
+.follow-submit {
+  width: 90%;
+  margin: 10px auto 50px auto;
+  background-color: #0094ff !important;
+  border-color: #0094ff !important;
+  box-shadow: 0px 20px 50px -20px #0094ff;
+}
+.at-modal__container {
+  width: 670px;
+}
+.at-modal-header {
+  white-space: normal;
+  text-align: left;
+  font-size: 28px;
+  font-family: PingFangSC-Regular;
+  font-weight: 400;
+  color: rgba(51, 51, 51, 1);
+  line-height: 40px;
+  letter-spacing: 1px;
+  padding: 50px 40px 50px 40px !important;
+}
+.at-modal {
+  .at-input {
+    padding: 5px 0;
+    .input {
+      text-align: center;
+    }
+  }
+  .at-modal-content {
+    padding: 0 40px;
+  }
+  button {
+    color: #0094ff !important;
+  }
+  .at-modal-header::after {
+    display: none;
+  }
+  .res.at-modal-header {
+    text-align: center;
+    .taro-img {
+      width: 120px;
+      height: 120px;
+    }
+    .succTip {
+      font-size: 44px;
+      font-family: PingFangSC-Regular;
+      font-weight: 400;
+      color: rgba(51, 51, 51, 1);
+      line-height: 62px;
+      margin-top: 44px;
+    }
+    .subSuccTip {
+      font-size: 32px;
+      font-family: PingFangSC-Regular;
+      font-weight: 400;
+      color: rgba(185, 185, 185, 1);
+      line-height: 56px;
+    }
+    .closebtn {
+      position: absolute;
+      top: 0%;
+      right: 0%;
+      font-size: 50px;
+      padding: 20px 35px;
+      color: #b8b8b8;
+    }
+  }
+}
+.faild {
+  text-align: left !important;
+  .succTip {
+    font-size: 28px !important;
+    line-height: 28px !important;
+    margin-top: 0 !important;
+  }
+}

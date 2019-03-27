@@ -1,10 +1,28 @@
 import Taro, { Component } from "@tarojs/taro";
-import { View, ScrollView ,Button} from "@tarojs/components";
+import { View, ScrollView, Button } from "@tarojs/components";
 import { observer, inject } from "@tarojs/mobx";
-import { AtButton, AtInput, AtGrid,  AtModal,
-    AtModalHeader,
-    AtModalAction, } from "taro-ui";
+import {
+  AtButton,
+  AtInput,
+  AtGrid,
+  AtModal,
+  AtModalHeader,
+  AtModalAction
+} from "taro-ui";
+import { fetchTicket } from "../../services";
 import "./index.less";
+import sha1 from "sha1";
+
+function randomString(len = 32) {
+  let $chars =
+    "ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678"; /****默认去掉了容易混淆的字符oOLl,9gq,Vv,Uu,I1****/
+  let maxPos = $chars.length;
+  let pwd = "";
+  for (let i = 0; i < len; i++) {
+    pwd += $chars.charAt(Math.floor(Math.random() * maxPos));
+  }
+  return pwd;
+}
 
 @inject("Store")
 @observer
@@ -13,11 +31,48 @@ class Help extends Component {
     value: "",
     isFaildOpened: false
   };
+  componentDidMount() {
+    this.weixinConfig();
+    this.timeout = setInterval(this.weixinConfig, 7200 * 1000);
+  }
+  componentWillUnmount() {
+    clearTimeout(this.timeout);
+    this.timeout = null;
+  }
+  weixinConfig = async () => {
+    let appId = "wxb5ffc223ee417f24";
+    let nonceStr = randomString(16); //随机串
+    let res = await fetchTicket(); //jsapi_ticket
+    let ticket = res.data.ticket;
+    let timestamp = Date.parse(new Date()) / 1000;
+    let string1 = `jsapi_ticket=${ticket}&noncestr=${nonceStr}&timestamp=${timestamp}&url=${
+      location.href.split("#")[0]
+    }`;
+    let signature = sha1(string1);
+    const config = {
+      debug: false,
+      appId: appId, // 必填，公众号的唯一标识
+      timestamp: timestamp, // 必填，生成签名的时间戳
+      nonceStr: nonceStr, // 必填，生成签名的随机串
+      signature: signature, // 必填，签名，见附录1
+      jsApiList: ["scanQRCode", "translateVoice"] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+    }
+    // alert(location.href.split("#")[0]);
+    wx.config(config);
+  };
+
   handleCall = () => {
     Taro.makePhoneCall({
-        phoneNumber: '96933'
-    })
-  }
+      phoneNumber: "96933"
+    });
+  };
+  handleBlur = () => {
+    setTimeout(() => {
+      const scrollHeight =
+        document.documentElement.scrollTop || document.body.scrollTop || 0;
+      window.scrollTo(0, Math.max(scrollHeight - 1, 0));
+    }, 100);
+  };
   handleClick = (_, index) => {
     switch (index) {
       case 3:
@@ -35,25 +90,49 @@ class Help extends Component {
         break;
     }
   };
-  handleChange = (value)=> {
-      this.setState({
-        value
-      })
-  }
+  handleChange = value => {
+    this.setState({
+      value
+    });
+  };
   handlSearch = () => {
-      const {Store} = this.props;
-    if(this.state.value){
-        Store.smElevator({
-            num: this.state.value
-        },()=>{
-            this.setState({
-                isFaildOpened: true
-            })
+    const { Store } = this.props;
+    if (this.state.value) {
+      Store.smElevator(
+        {
+          num: this.state.value
+        },
+        () => {
+          this.setState({
+            isFaildOpened: true
+          });
+        }
+      );
+    } else {
+      wx.ready(() => {
+        wx.scanQRCode({
+          needResult: 1,
+          desc: "scanQRCode desc",
+          success: res => {
+            if(res.resultStr){
+              Store.smElevator(
+                {
+                  num: res.resultStr
+                },
+                () => {
+                  this.setState({
+                    isFaildOpened: true
+                  });
+                }
+              );
+            }
+          }
         });
+      });
     }
   };
   render() {
-      const {isFaildOpened} = this.state;
+    const { isFaildOpened } = this.state;
     return (
       <ScrollView scrollY className="help-page">
         <View className="help-card help-onekey">
@@ -71,6 +150,7 @@ class Help extends Component {
             placeholder="请输入电梯编码…"
             value={this.state.value}
             onChange={this.handleChange}
+            onBlur={this.handleBlur}
           />
           <AtButton onClick={this.handlSearch}>一键查询</AtButton>
         </View>
@@ -109,23 +189,21 @@ class Help extends Component {
           />
         </View>
         <AtModal isOpened={isFaildOpened}>
-              <AtModalHeader className="res faild">
-                <View className="succTip">
-                  暂无相关电梯信息
-                </View>
-              </AtModalHeader>
-              <AtModalAction>
-                <Button
-                  onClick={() => {
-                    this.setState({
-                      isFaildOpened: false
-                    });
-                  }}
-                >
-                  关闭
-                </Button>
-              </AtModalAction>
-            </AtModal>
+          <AtModalHeader className="res faild">
+            <View className="succTip">暂无相关电梯信息</View>
+          </AtModalHeader>
+          <AtModalAction>
+            <Button
+              onClick={() => {
+                this.setState({
+                  isFaildOpened: false
+                });
+              }}
+            >
+              关闭
+            </Button>
+          </AtModalAction>
+        </AtModal>
       </ScrollView>
     );
   }

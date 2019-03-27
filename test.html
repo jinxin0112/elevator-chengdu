@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, user-scalable=no"
+    />
+    <link
+      rel="stylesheet"
+      href="https://res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.bootcss.com/jquery-weui/1.0.1/css/jquery-weui.min.css"
+    />
+    <link
+      href="https://cdn.bootcss.com/Swiper/3.4.2/css/swiper.css"
+      rel="stylesheet"
+    />
+    <link href="${ctxStatic}/app/css/main.css" rel="stylesheet" />
+    <script type="text/javascript">
+      var BASE_STATIC_URL = "${ctxStatic }";
+    </script>
+    <title>电梯e服务</title>
+  </head>
+  <body ontouchstart>
+    <div class="weui-tab">
+      <div class="weui-tab__bd weui-tab__panel">
+        <div id="tab1" class="weui-tab__bd-item weui-tab__bd-item--active">
+          <!-- 轮播 start-->
+          <div class="swiper-container swiper-container-horizontal">
+            <!-- Additional required wrapper -->
+            <div class="swiper-wrapper">
+              <div
+                class="swiper-slide swiper-slide-duplicate"
+                data-swiper-slide-index="2"
+              >
+                < img src="${ctxStatic }/app/images/banner3.jpg">
+              </div>
+              <!-- Slides -->
+              <div class="swiper-slide" data-swiper-slide-index="0">
+                < img src="${ctxStatic }/app/images/banner1.png">
+              </div>
+              <div
+                class="swiper-slide swiper-slide-prev"
+                data-swiper-slide-index="1"
+              >
+                < img src="${ctxStatic }/app/images/banner2.jpg">
+              </div>
+              <div
+                class="swiper-slide swiper-slide-active"
+                data-swiper-slide-index="2"
+              >
+                < img src="${ctxStatic }/app/images/banner3.jpg">
+              </div>
+              <div
+                class="swiper-slide swiper-slide-duplicate swiper-slide-next"
+                data-swiper-slide-index="0"
+              >
+                < img src="${ctxStatic }/app/images/banner1.png">
+              </div>
+            </div>
+            <!-- If we need pagination -->
+            <div class="swiper-pagination swiper-pagination-bullets">
+              <span class="swiper-pagination-bullet"></span>
+              <span class="swiper-pagination-bullet"></span>
+              <span
+                class="swiper-pagination-bullet swiper-pagination-bullet-active"
+              ></span>
+            </div>
+          </div>
+          <!-- 轮播 end-->
+          #if(loginUser==null)
+          <marquee
+            scrollamount="2"
+            direction="left"
+            style="font-size: 12px; line-height: 25px;height:25px;color:#e66e1e;"
+          >
+            #for(ing:maintainIng)
+            ${org.apache.commons.lang3.StringUtils::overlay(ing.userName,'**',1,6)}
+            正在${ing.projectName}维保中 &nbsp;&nbsp; #end
+          </marquee>
+          #end
+          <!-- grids start-->
+          <div class="weui-grids">
+            <a href=" " class="weui-grid js_grid" id="weui_tenanced">
+              <div class="weui-grid__icon">
+                < img src="${ctxStatic }/app/images/maintain.png" alt="">
+              </div>
+              <p class="weui-grid__label">电梯维修</p>
+            </a>
+            <a href="javascript:;" class="weui-grid js_grid" id="weix_tenanced">
+              <div class="weui-grid__icon">
+                < img src="${ctxStatic }/app/images/maintenance.png" alt="">
+              </div>
+              <p class="weui-grid__label">扫一扫</p>
+            </a>
+            <a
+              href="${ctx }/wx/wxrouter/maintian/toList"
+              class="weui-grid js_grid"
+            >
+              <div class="weui-grid__icon">
+                < img src="${ctxStatic }/app/images/mine.png" alt="">
+              </div>
+              <p class="weui-grid__label">我的电梯</p>
+            </a>
+          </div>
+          <!-- grids end-->
+          <!-- 最新资讯 start-->
+          <div class="weui-panel weui-panel_access">
+            <div class="weui-panel__hd">最新资讯</div>
+            <div class="weui-panel__bd">
+              #for(notice:page.records)
+              <a
+                href="${ctx}/wxrouter/detail/${notice.id}"
+                class="weui-media-box weui-media-box_appmsg"
+              >
+                <div class="weui-media-box__hd">
+                  #if(notice.attachmentId != null) < img
+                  class="weui-media-box__thumb"
+                  src="${ctx}/xs/r/view/${notice.attachmentId[0]}"> #else < img
+                  class="weui-media-box__thumb"
+                  src="${ctxStatic}/app/images/e.jpg"> #end
+                </div>
+                <div class="weui-media-box__bd">
+                  <h4 class="weui-media-box__title">${notice.title}</h4>
+                  <p class="weui-media-box__desc">
+                    ${HtmlUtils::text(notice.content,40)}
+                  </p>
+                </div>
+              </a>
+              #end
+            </div>
+          </div>
+          <!-- 最新资讯 end-->
+        </div>
+        <!---->
+        <div id="tab2" class="weui-tab__bd-item"></div>
+        <!--资料库 start-->
+        <div id="tab3" class="weui-tab__bd-item">
+          <div class="weui-panel weui-panel_access">
+            <div class="weui-panel__hd">资料库</div>
+            <div class="weui-panel__bd">#include("./knowlegde.html")</div>
+          </div>
+        </div>
+        <!--资料库 end-->
+        <!--我的信息 start-->
+        <div id="tab4" class="weui-tab__bd-item">#include("./mine.html")</div>
+        <!--我的信息 end-->
+      </div>
+      <div class="weui-tabbar">
+        <a href="#tab1" class="weui-tabbar__item weui-bar__item--on">
+          <div class="weui-tabbar__icon">
+            < img src="${ctxStatic }/app/images/home.png" alt="">
+          </div>
+          <p class="weui-tabbar__label">首页</p>
+        </a>
+        <a
+          href="${ctx }/wx/wxrouter/maintian/findMyRecord"
+          class="weui-tabbar__item"
+        >
+          <div class="weui-tabbar__icon">
+            < img src="${ctxStatic }/app/images/search.png" alt="">
+          </div>
+          <p class="weui-tabbar__label">e查询</p>
+        </a>
+        <a href="#tab3" class="weui-tabbar__item">
+          <div class="weui-tabbar__icon">
+            < img src="${ctxStatic }/app/images/book.png" alt="">
+          </div>
+          <p class="weui-tabbar__label">资料库</p>
+        </a>
+        <a href="#tab4" class="weui-tabbar__item">
+          <div class="weui-tabbar__icon">
+            < img src="${ctxStatic }/app/images/me.png" alt="">
+          </div>
+          <p class="weui-tabbar__label">我的</p>
+        </a>
+      </div>
+    </div>
+    <script
+      type="text/javascript"
+      src="https://cdn.bootcss.com/jquery/2.2.4/jquery.min.js"
+    ></script
+    ><script
+      type="text/javascript"
+      src="http://cdn.bootcss.com/jquery-weui/1.0.1/js/jquery-weui.min.js"
+    ></script
+    ><script
+      type="text/javascript"
+      src="https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js"
+    ></script
+    ><script
+      type="text/javascript"
+      src="http://cdn.bootcss.com/jquery-weui/1.0.1/js/swiper.min.js"
+    ></script
+    ><script
+      type="text/javascript"
+      src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"
+    ></script
+    ><script>
+      $(function() {        $(".swiper-container").swiper({            loop: true,            autoplay: 3000        });        FastClick.attach(document.body);        //js-sdk扫描的配置        var appId = '${appId}';        var timestamp = '${conf.timestamp}';//时间戳        var nonceStr = '${conf.nonceStr}';//随机串        var signature = '${conf.signature}';//签名
+          var url = '${conf.url}';//url        var jsapi_ticket = '${conf.jsapi_ticket}';//票据
+          wx.config({            debug:false,            appId: appId, // 必填，公众号的唯一标识            timestamp: timestamp, // 必填，生成签名的时间戳            nonceStr: nonceStr, // 必填，生成签名的随机串            signature: signature,// 必填，签名，见附录1            jsApiList: ['scanQRCode'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2        });
+      });
+      //扫描维保电梯    $("#weix_tenanced").on('click',function (e) {
+          wx.scanQRCode({            needResult : 1,// 默认为0，扫描结果由微信处理，1则直接返回扫描结果            desc : 'scanQRCode desc',            success : function(res) {                window.location.href="${ctx}/wx/wechat/toItem?code="+res.resultStr;            }        });
+          e.preventDefault();        e.stopPropagation();    });
+      //电梯维修    $("#weui_tenanced").on('click',function(e) {
+          wx.scanQRCode({            needResult: 1,            desc: 'scanQRCode desc',            success: function (res) {                var result = res.resultStr;                window.location.href="${ctx}/wx/wxrouter/repair/toWork?code="+result;            }        });
+          e.preventDefault();        e.stopPropagation();    });
+    </script>
+  </body>
+</html>

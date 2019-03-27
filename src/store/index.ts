@@ -3,7 +3,9 @@ import {
   fetchCurrent,
   submitCurrent,
   submitUser,
-  smElevator
+  smElevator,
+  fetchTicket,
+  fetchFollowList
 } from "../services";
 import Taro from "@tarojs/taro";
 
@@ -11,6 +13,7 @@ const Store = observable(
   {
     serviceData: {},
     currentTab: 0,
+    ticket: '',
     news: [
       {
         index: 0,
@@ -48,6 +51,14 @@ const Store = observable(
     // 问卷调查 列表
     currentSurvey: [],
     canSubmit: false,
+
+    // 关注
+    followList: [],
+
+    async getFollowList() {
+      const { data = [] } = (await fetchFollowList()) || {};
+      this.followList = data;
+    },
     async getCurrentSurvey() {
       const { data = [] } = (await fetchCurrent()) || {};
       this.currentSurvey = data;
@@ -65,7 +76,6 @@ const Store = observable(
         }
         return pre;
       }, 0);
-      console.log("count", count);
       this.canSubmit = count === this.currentSurvey.length;
     },
     changeTab(index) {
@@ -111,7 +121,8 @@ const Store = observable(
       } else {
         err();
       }
-    }
+    },
+
   },
   {
     changeTab: action

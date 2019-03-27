@@ -8,6 +8,14 @@ export async function fetchCurrent(){
     })
 }
 
+// 获取关注列表
+export async function fetchFollowList(){
+    return request({
+        method: 'get',
+        url: '/elevator'
+    })
+}
+
 // 提交
 export async function submitCurrent(params){
     return request({
@@ -32,4 +40,12 @@ export async function smElevator(params){
         method: 'post',
         url: `/elevator?num=${params.num}`
     })     
+}
+
+// 微信ticket
+export async function fetchTicket(){
+    return request({
+        method: 'get',
+        url: '/wx/ticket'
+    })
 }
