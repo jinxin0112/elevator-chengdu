@@ -7,7 +7,7 @@ module.exports = {
   },
   weapp: {},
   h5: {
-    publicPath: '/elevator-chengdu',
+    publicPath: '/',
     output: {
       filename: 'js/[name].[hash:8].js',
       chunkFilename: 'js/[name].[chunkhash:8].js'

@@ -15,7 +15,20 @@ export async function fetchFollowList(){
         url: '/elevator'
     })
 }
-
+// 添加关注
+export async function putFollowList(num){
+    return request({
+        method: 'put',
+        url: `/elevator?num=${num}`
+    })
+}
+// 移除关注
+export async function removeFollowList(num){
+    return request({
+        method: 'DELETE',
+        url: `/elevator?num=${num}`
+    })
+}
 // 提交
 export async function submitCurrent(params){
     return request({

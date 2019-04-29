@@ -4,8 +4,9 @@ import {
   submitCurrent,
   submitUser,
   smElevator,
-  fetchTicket,
-  fetchFollowList
+  putFollowList,
+  fetchFollowList,
+  removeFollowList
 } from "../services";
 import Taro from "@tarojs/taro";
 
@@ -14,6 +15,7 @@ const Store = observable(
     serviceData: {},
     currentTab: 0,
     ticket: '',
+    loading: false,
     news: [
       {
         index: 0,
@@ -56,9 +58,23 @@ const Store = observable(
     followList: [],
 
     async getFollowList() {
+      this.loading = true;
       const { data = [] } = (await fetchFollowList()) || {};
+      this.loading = false;
       this.followList = data;
     },
+    async putFollowList(num){
+      this.loading = true;
+      const { data = [] } = await putFollowList(num);
+      this.loading = false;
+      this.followList = data;
+    },
+    async removeFollowList(num){
+      this.loading = true;
+      const { data = [] } = await removeFollowList(num);
+      this.loading = false;
+      this.followList = data;
+    },    
     async getCurrentSurvey() {
       const { data = [] } = (await fetchCurrent()) || {};
       this.currentSurvey = data;
